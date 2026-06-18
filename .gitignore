@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Per-engine isolated venvs (set up locally; never committed)
+runtimes/*/
+
+# Model weights / caches / outputs
+models/
+output/
+*.wav
+*.flac
+*.mp3
+*.npy
+*.safetensors
+*.pth
+*.ckpt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

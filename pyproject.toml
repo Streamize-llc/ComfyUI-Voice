@@ -1,0 +1,19 @@
+[project]
+name = "comfyui-voice"
+version = "0.0.1"
+description = "Extensible open-source audio/voice node suite for ComfyUI (TTS, voice clone, VC, ASR, and more) — single-file engine adapters driven by capability declarations."
+authors = [{ name = "ComfyUI-Voice contributors" }]
+license = { text = "Apache-2.0" }
+readme = "README.md"
+requires-python = ">=3.10"
+# Core suite has NO heavy deps beyond what ComfyUI already provides (torch).
+# Each engine declares its own deps and is isolated per its capability.
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/your-org/ComfyUI-Voice"
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Voice"
+Icon = "🎙️"
