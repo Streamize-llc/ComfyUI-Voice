@@ -22,6 +22,7 @@ included but not yet installed/verified.
 |---|---|---|---|
 | **MeloTTS Korean** (`melotts_korean`) | TTS (preset voice) | **MIT** ✅ | Primary commercial-safe KO TTS. Native (vendored VITS); fast. Round-trip near-perfect. |
 | **CosyVoice 3.0** (`cosyvoice3`) | TTS zero-shot **voice clone** + VC | **Apache-2.0** ✅ | SOTA cloning, native KO/ZH/EN/JA… Needs one-time setup (repo + weights, see below). |
+| **Supertonic 3** (`supertonic`) | TTS (preset, on-device) | code MIT / model **OpenRAIL-M** ⚠️ | ONNX (truly torch-independent, cleanest install). Native KO. Use `voice="F1"`, `total_steps≥16` (M-voices/low steps garble). Review OpenRAIL-M before commercial use. |
 | **MMS-TTS Korean** (`mms_tts_korean`) | TTS (preset) | CC-BY-NC ⚠️ | Via `transformers` VitsModel. **Non-commercial — eval/reference only.** |
 | **faster-whisper** (`faster_whisper`) | ASR (STT) | **MIT** ✅ | large-v3-turbo, CTranslate2 (torch-independent). Word timestamps. |
 | **Whisper large-v3** (`whisper_v3`) | ASR (STT) | **Apache-2.0** ✅ | Via host `transformers`. `VOICE_WHISPER_MODEL` env selects model size. |
@@ -37,7 +38,7 @@ model deps aren't installed/tested yet — enable per the `Voice Engine Info`
 node's install hint, then verify:
 
 - **TTS:** `kokoro` (Apache, **no Korean**), `chatterbox` (MIT, clone+emotion),
-  `qwen3_tts` (Apache, clone), `oute_tts` (Apache), `supertonic` (OpenRAIL-M ⚠️).
+  `qwen3_tts` (Apache, clone), `oute_tts` (Apache).
 - **ASR:** `qwen3_asr` (Apache, +timestamps), `sensevoice` (custom ⚠️, fast),
   `whisperx` (BSD, alignment + diarization).
 - **Demo (no deps):** `reference_tone` (TTS), `reference_asr` — for testing the

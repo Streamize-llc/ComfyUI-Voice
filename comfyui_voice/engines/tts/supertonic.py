@@ -34,6 +34,7 @@ class SupertonicTTS(BaseEngine):
             "params": {
                 "text": {"type": "string", "multiline": True, "default": "안녕하세요, 만나서 반갑습니다.", "targets": ["text"]},
                 "voice": {"type": "enum", "default": "F1", "options": _VOICES, "targets": ["voice"]},
+                "total_steps": {"type": "int", "default": 16, "min": 5, "max": 32, "targets": ["total_steps"]},
                 "speed": {"type": "float", "default": 1.05, "min": 0.7, "max": 2.0, "step": 0.05, "targets": ["speed"]},
             }
         },
@@ -42,18 +43,19 @@ class SupertonicTTS(BaseEngine):
     def load(self) -> None:
         from supertonic import TTS
 
-        self._tts = TTS(model="supertonic-3", auto_download=True)
+        self._tts = TTS(auto_download=True)
 
     def generate(self, task: str, req: dict[str, Any]) -> dict[str, Any]:
         import numpy as np
 
         text = str(req.get("text") or "").strip()
-        voice = req.get("voice") or "F1"
+        voice = req.get("voice") or "F1"  # F1 verified good for KO; M-voices unreliable
         lang = req.get("language")
         lang = "ko" if lang in (None, "auto") else lang
+        steps = int(req.get("total_steps", 16))  # 16 >> 8 for clean KO; 8 garbles
         style = self._tts.get_voice_style(voice_name=voice)
         wav, _ = self._tts.synthesize(
-            text=text, voice_style=style, total_steps=8,
+            text=text, voice_style=style, total_steps=steps,
             speed=float(req.get("speed", 1.05)), silence_duration=0.3, lang=lang, verbose=False,
         )
-        return {"waveform": np.asarray(wav, dtype=np.float32), "sample_rate": int(self._tts.sample_rate)}
+        return {"waveform": np.asarray(wav, dtype=np.float32).reshape(-1), "sample_rate": int(self._tts.sample_rate)}
