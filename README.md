@@ -10,6 +10,10 @@ TTS · voice cloning · speech‑to‑text — many state‑of‑the‑art open 
 [![ComfyUI](https://img.shields.io/badge/ComfyUI-custom%20node-8A2BE2.svg)](https://github.com/comfyanonymous/ComfyUI)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing)
 
+<br/>
+
+**English** · [한국어](README.ko.md) · [中文](README.zh.md) · [日本語](README.ja.md)
+
 </div>
 
 ---
