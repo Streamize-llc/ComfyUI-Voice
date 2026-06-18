@@ -54,6 +54,7 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | **MeloTTS** (`melotts_korean`) | 快速预设 TTS | Korean¹ | Apache‑2.0 / MIT | ✅ |
 | **CosyVoice 3.0** (`cosyvoice3`) | **零样本声音克隆** + VC | zh · en · ja · ko · de · es · fr · it · ru | Apache‑2.0 | ✅ |
 | **Supertonic 3** (`supertonic`) | 设备端预设 TTS（ONNX） | 30+ 含 ko | code MIT / model OpenRAIL‑M | ✅ |
+| **Higgs Audio v3 (4B)** (`higgs_audio_v3`) | 富表现力 TTS + 零样本克隆 | 100+ 含 ko·zh·ja | **研究/非商业** ⚠️ | ✅（评估） |
 | **MMS‑TTS** (`mms_tts_korean`) | 预设 TTS（Transformers VITS） | Korean¹ | CC‑BY‑NC ⚠️ | ✅（评估） |
 | **Kokoro‑82M** (`kokoro`) | 超轻量预设 TTS | en · es · fr · hi · it · pt · ja · zh | Apache‑2.0 | 🧪 |
 | **Chatterbox** (`chatterbox`) | 克隆 + 情感控制 | 23 种语言 | MIT | 🧪 |

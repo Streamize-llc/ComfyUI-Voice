@@ -61,6 +61,7 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | **MeloTTS** (`melotts_korean`) | 高速プリセット TTS | Korean¹ | Apache‑2.0 / MIT | ✅ |
 | **CosyVoice 3.0** (`cosyvoice3`) | **ゼロショットボイスクローン** + VC | zh · en · ja · ko · de · es · fr · it · ru | Apache‑2.0 | ✅ |
 | **Supertonic 3** (`supertonic`) | オンデバイスプリセット TTS (ONNX) | 30+ incl. ko | code MIT / model OpenRAIL‑M | ✅ |
+| **Higgs Audio v3 (4B)** (`higgs_audio_v3`) | 表現力豊かな TTS + ゼロショットクローン | 100+ (ko·zh·ja 含む) | **研究/非商用** ⚠️ | ✅ (eval) |
 | **MMS‑TTS** (`mms_tts_korean`) | プリセット TTS (Transformers VITS) | Korean¹ | CC‑BY‑NC ⚠️ | ✅ (eval) |
 | **Kokoro‑82M** (`kokoro`) | 超軽量プリセット TTS | en · es · fr · hi · it · pt · ja · zh | Apache‑2.0 | 🧪 |
 | **Chatterbox** (`chatterbox`) | クローン + 感情制御 | 23 langs | MIT | 🧪 |
