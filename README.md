@@ -13,11 +13,27 @@ generation and more — under one coherent, contributor-friendly architecture.
 
 - ✅ Core framework: typed sockets, engine registry, model manager, runtime
   routing (in-proc / subprocess), SR guard, capability-driven form + validation.
-- ✅ Generic `Voice TTS 🎙️` node + `Voice Engine Info 🎙️` node (V3 IO API).
-- ✅ A dependency-free **reference engine** (`reference_tone`) so the whole
-  pipeline is verifiable on a clean install and serves as the adapter template.
-- ⏭️ Next: real TTS engines (MeloTTS / Chatterbox / CosyVoice), `VOICE_REF`
-  cloning, voice conversion, then ASR / separation / enhance.
+- ✅ Nodes (V3 IO API): `Voice TTS 🎙️`, `Voice ASR (STT) 🎙️`, `Voice Engine Info 🎙️`.
+- ✅ 16 engine adapters (7 TTS + 6 STT + 1 native KO TTS + 2 dep-free reference).
+- ✅ **Real inference proven** end-to-end on the host torch 2.12 (no subprocess):
+  MMS-TTS Korean (VITS via transformers) → WAV → Whisper (transformers) → Korean
+  transcript round-trip.
+- ⏭️ Next: native-port the commercial-safe flagships (MeloTTS / CosyVoice3 / Qwen3)
+  onto torch 2.12; `VOICE_REF` cloning; voice conversion; separation / enhance.
+
+## Two adapter tiers (the dependency strategy)
+
+Following ComfyUI core's philosophy (it reimplements model architectures in
+`comfy/` rather than pip-installing diffusers), engines come in two tiers:
+
+1. **Native (preferred, `isolation="inproc"`):** the model's layers + weight
+   loading + frontend run on the HOST torch 2.12 — either via `transformers`
+   (the architecture lib already in our stack, e.g. `mms_tts_korean`,
+   `whisper_v3`) or by porting the official inference code. No version pins, no
+   dependency conflicts, no subprocess. **This is the target for every engine.**
+2. **Thin-wrapper (fallback, `isolation="subprocess"`):** pip-install the
+   upstream package into a per-engine venv and drive it over the worker protocol.
+   Used until a model is natively ported (e.g. `cosyvoice3`, `qwen3_tts` today).
 
 ## Design principles
 

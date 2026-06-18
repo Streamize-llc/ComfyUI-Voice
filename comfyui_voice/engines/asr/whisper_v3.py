@@ -29,16 +29,21 @@ class WhisperV3(BaseEngine):
     )
 
     def load(self) -> None:
+        import os
+
         import torch
         from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 
+        # Defaults to large-v3; override with VOICE_WHISPER_MODEL (e.g. a smaller
+        # model for quick checks). Runs on the host torch via transformers.
+        model_id = os.environ.get("VOICE_WHISPER_MODEL", "openai/whisper-large-v3")
         device = "cuda:0" if torch.cuda.is_available() else "cpu"
         dtype = torch.float16 if torch.cuda.is_available() else torch.float32
         model = AutoModelForSpeechSeq2Seq.from_pretrained(
-            "openai/whisper-large-v3", torch_dtype=dtype, low_cpu_mem_usage=True, use_safetensors=True
+            model_id, torch_dtype=dtype, low_cpu_mem_usage=True, use_safetensors=True
         )
         model.to(device)
-        processor = AutoProcessor.from_pretrained("openai/whisper-large-v3")
+        processor = AutoProcessor.from_pretrained(model_id)
         self._pipe = pipeline(
             "automatic-speech-recognition",
             model=model,
