@@ -4,8 +4,12 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 
-# Per-engine isolated venvs (set up locally; never committed)
+# Per-engine isolated venvs + cloned upstream inference repos (set up locally;
+# never committed). Keep runtimes/worker.py (the only tracked file in runtimes/).
+comfyui_voice/runtimes/*/
+comfyui_voice/runtimes/*.log
 runtimes/*/
+*.log
 
 # Model weights / caches / outputs
 models/
