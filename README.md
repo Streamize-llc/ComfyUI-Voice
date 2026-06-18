@@ -62,8 +62,6 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | **CosyVoice 3.0** (`cosyvoice3`) | **Zero‑shot voice clone** + VC | zh · en · ja · ko · de · es · fr · it · ru | Apache‑2.0 | ✅ |
 | **Supertonic 3** (`supertonic`) | On‑device preset TTS (ONNX) | 30+ incl. ko | code MIT / model OpenRAIL‑M | ✅ |
 | **Higgs Audio v3 (4B)** (`higgs_audio_v3`) | Expressive TTS + zero‑shot clone | 100+ incl. ko·zh·ja | **Research/Non‑Commercial** ⚠️ | ✅ (eval) |
-| **MMS‑TTS** (`mms_tts_korean`) | Preset TTS (Transformers VITS) | Korean¹ | CC‑BY‑NC ⚠️ | ✅ (eval) |
-| **Kokoro‑82M** (`kokoro`) | Ultra‑light preset TTS | en · es · fr · hi · it · pt · ja · zh | Apache‑2.0 | 🧪 |
 | **Chatterbox** (`chatterbox`) | Clone + emotion control | 23 langs | MIT | 🧪 |
 | **Qwen3‑TTS** (`qwen3_tts`) | Clone + voice design | 10 langs | Apache‑2.0 | 🧪 |
 | **OuteTTS 1.0** (`oute_tts`) | Compact LLM‑TTS | 14 langs | Apache‑2.0 | 🧪 |
@@ -73,13 +71,12 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | Engine (`id`) | Capability | Languages | License | Status |
 |---|---|---|---|---|
 | **faster‑whisper** (`faster_whisper`) | Fast ASR + word timestamps | 99 langs | MIT | ✅ |
-| **Whisper large‑v3** (`whisper_v3`) | ASR (Transformers) | 99 langs | Apache‑2.0 | ✅ |
 | **Korean Whisper** (`korean_whisper`) | ASR (ko fine‑tune) | Korean | Apache‑2.0 | 🧪 |
 | **Qwen3‑ASR** (`qwen3_asr`) | ASR + forced‑aligner timestamps | 30+ langs | Apache‑2.0 | 🧪 |
 | **SenseVoice** (`sensevoice`) | Very fast ASR + emotion/event tags | 5+ langs | custom ⚠️ | 🧪 |
 | **WhisperX** (`whisperx`) | ASR + word alignment + diarization | whisper langs | BSD‑2 (+pyannote gated) | 🧪 |
 
-<sub>¹ The shipped checkpoint is Korean; the MeloTTS/MMS families are multilingual — additional language adapters are easy drop‑ins.</sub>
+<sub>¹ The shipped checkpoint is Korean; the MeloTTS families are multilingual — additional language adapters are easy drop‑ins.</sub>
 
 Plus two dependency‑free **reference engines** (`reference_tone`, `reference_asr`)
 that let you smoke‑test the whole pipeline on a clean install and serve as the

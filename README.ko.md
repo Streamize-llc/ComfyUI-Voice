@@ -62,8 +62,6 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | **CosyVoice 3.0** (`cosyvoice3`) | **제로샷 음성 클로닝** + VC | zh · en · ja · ko · de · es · fr · it · ru | Apache‑2.0 | ✅ |
 | **Supertonic 3** (`supertonic`) | 온디바이스 프리셋 TTS (ONNX) | 30+ incl. ko | code MIT / model OpenRAIL‑M | ✅ |
 | **Higgs Audio v3 (4B)** (`higgs_audio_v3`) | 표현력 TTS + 제로샷 클로닝 | 100+ (ko·zh·ja 포함) | **연구/비상업** ⚠️ | ✅ (eval) |
-| **MMS‑TTS** (`mms_tts_korean`) | 프리셋 TTS (Transformers VITS) | Korean¹ | CC‑BY‑NC ⚠️ | ✅ (eval) |
-| **Kokoro‑82M** (`kokoro`) | 초경량 프리셋 TTS | en · es · fr · hi · it · pt · ja · zh | Apache‑2.0 | 🧪 |
 | **Chatterbox** (`chatterbox`) | 클로닝 + 감정 제어 | 23 langs | MIT | 🧪 |
 | **Qwen3‑TTS** (`qwen3_tts`) | 클로닝 + 음성 디자인 | 10 langs | Apache‑2.0 | 🧪 |
 | **OuteTTS 1.0** (`oute_tts`) | 컴팩트 LLM‑TTS | 14 langs | Apache‑2.0 | 🧪 |
@@ -73,13 +71,12 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | 엔진 (`id`) | 기능 | 언어 | 라이선스 | 상태 |
 |---|---|---|---|---|
 | **faster‑whisper** (`faster_whisper`) | 빠른 ASR + 단어 타임스탬프 | 99 langs | MIT | ✅ |
-| **Whisper large‑v3** (`whisper_v3`) | ASR (Transformers) | 99 langs | Apache‑2.0 | ✅ |
 | **Korean Whisper** (`korean_whisper`) | ASR (ko 파인튜닝) | Korean | Apache‑2.0 | 🧪 |
 | **Qwen3‑ASR** (`qwen3_asr`) | ASR + 강제 정렬기 타임스탬프 | 30+ langs | Apache‑2.0 | 🧪 |
 | **SenseVoice** (`sensevoice`) | 매우 빠른 ASR + 감정/이벤트 태그 | 5+ langs | custom ⚠️ | 🧪 |
 | **WhisperX** (`whisperx`) | ASR + 단어 정렬 + 화자 분리 | whisper langs | BSD‑2 (+pyannote gated) | 🧪 |
 
-<sub>¹ 포함된 체크포인트는 한국어용입니다. MeloTTS/MMS 계열은 다국어를 지원하며 — 추가 언어 어댑터는 손쉽게 꽂아 쓸 수 있습니다.</sub>
+<sub>¹ 포함된 체크포인트는 한국어용입니다. MeloTTS 계열은 다국어를 지원하며 — 추가 언어 어댑터는 손쉽게 꽂아 쓸 수 있습니다.</sub>
 
 또한 의존성이 없는 두 개의 **레퍼런스 엔진**(`reference_tone`, `reference_asr`)이
 포함되어 있어, 깨끗한 설치 상태에서 전체 파이프라인을 빠르게 점검하고 어댑터

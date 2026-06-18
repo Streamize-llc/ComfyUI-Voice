@@ -55,8 +55,6 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | **CosyVoice 3.0** (`cosyvoice3`) | **零样本声音克隆** + VC | zh · en · ja · ko · de · es · fr · it · ru | Apache‑2.0 | ✅ |
 | **Supertonic 3** (`supertonic`) | 设备端预设 TTS（ONNX） | 30+ 含 ko | code MIT / model OpenRAIL‑M | ✅ |
 | **Higgs Audio v3 (4B)** (`higgs_audio_v3`) | 富表现力 TTS + 零样本克隆 | 100+ 含 ko·zh·ja | **研究/非商业** ⚠️ | ✅（评估） |
-| **MMS‑TTS** (`mms_tts_korean`) | 预设 TTS（Transformers VITS） | Korean¹ | CC‑BY‑NC ⚠️ | ✅（评估） |
-| **Kokoro‑82M** (`kokoro`) | 超轻量预设 TTS | en · es · fr · hi · it · pt · ja · zh | Apache‑2.0 | 🧪 |
 | **Chatterbox** (`chatterbox`) | 克隆 + 情感控制 | 23 种语言 | MIT | 🧪 |
 | **Qwen3‑TTS** (`qwen3_tts`) | 克隆 + 声音设计 | 10 种语言 | Apache‑2.0 | 🧪 |
 | **OuteTTS 1.0** (`oute_tts`) | 紧凑型 LLM‑TTS | 14 种语言 | Apache‑2.0 | 🧪 |
@@ -66,13 +64,12 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | 引擎 (`id`) | 能力 | 语言 | 许可证 | 状态 |
 |---|---|---|---|---|
 | **faster‑whisper** (`faster_whisper`) | 快速 ASR + 词级时间戳 | 99 种语言 | MIT | ✅ |
-| **Whisper large‑v3** (`whisper_v3`) | ASR（Transformers） | 99 种语言 | Apache‑2.0 | ✅ |
 | **Korean Whisper** (`korean_whisper`) | ASR（ko 微调） | Korean | Apache‑2.0 | 🧪 |
 | **Qwen3‑ASR** (`qwen3_asr`) | ASR + 强制对齐时间戳 | 30+ 种语言 | Apache‑2.0 | 🧪 |
 | **SenseVoice** (`sensevoice`) | 极速 ASR + 情感/事件标签 | 5+ 种语言 | custom ⚠️ | 🧪 |
 | **WhisperX** (`whisperx`) | ASR + 词级对齐 + 说话人分离 | whisper 支持的语言 | BSD‑2（+pyannote 需授权） | 🧪 |
 
-<sub>¹ 随附的检查点为韩语；MeloTTS/MMS 系列本身是多语言的 —— 额外的语言适配器可以轻松即插即用。</sub>
+<sub>¹ 随附的检查点为韩语；MeloTTS 系列本身是多语言的 —— 额外的语言适配器可以轻松即插即用。</sub>
 
 此外还提供两个无依赖的**参考引擎**（`reference_tone`、`reference_asr`），
 让你在干净的安装环境中即可冒烟测试整条流水线，同时它们也充当适配器模板。

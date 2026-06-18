@@ -62,8 +62,6 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | **CosyVoice 3.0** (`cosyvoice3`) | **ゼロショットボイスクローン** + VC | zh · en · ja · ko · de · es · fr · it · ru | Apache‑2.0 | ✅ |
 | **Supertonic 3** (`supertonic`) | オンデバイスプリセット TTS (ONNX) | 30+ incl. ko | code MIT / model OpenRAIL‑M | ✅ |
 | **Higgs Audio v3 (4B)** (`higgs_audio_v3`) | 表現力豊かな TTS + ゼロショットクローン | 100+ (ko·zh·ja 含む) | **研究/非商用** ⚠️ | ✅ (eval) |
-| **MMS‑TTS** (`mms_tts_korean`) | プリセット TTS (Transformers VITS) | Korean¹ | CC‑BY‑NC ⚠️ | ✅ (eval) |
-| **Kokoro‑82M** (`kokoro`) | 超軽量プリセット TTS | en · es · fr · hi · it · pt · ja · zh | Apache‑2.0 | 🧪 |
 | **Chatterbox** (`chatterbox`) | クローン + 感情制御 | 23 langs | MIT | 🧪 |
 | **Qwen3‑TTS** (`qwen3_tts`) | クローン + ボイスデザイン | 10 langs | Apache‑2.0 | 🧪 |
 | **OuteTTS 1.0** (`oute_tts`) | コンパクトな LLM‑TTS | 14 langs | Apache‑2.0 | 🧪 |
@@ -73,13 +71,12 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 | エンジン (`id`) | 機能 | 言語 | ライセンス | ステータス |
 |---|---|---|---|---|
 | **faster‑whisper** (`faster_whisper`) | 高速 ASR + 単語タイムスタンプ | 99 langs | MIT | ✅ |
-| **Whisper large‑v3** (`whisper_v3`) | ASR (Transformers) | 99 langs | Apache‑2.0 | ✅ |
 | **Korean Whisper** (`korean_whisper`) | ASR (ko ファインチューン) | Korean | Apache‑2.0 | 🧪 |
 | **Qwen3‑ASR** (`qwen3_asr`) | ASR + 強制アライナーによるタイムスタンプ | 30+ langs | Apache‑2.0 | 🧪 |
 | **SenseVoice** (`sensevoice`) | 非常に高速な ASR + 感情/イベントタグ | 5+ langs | custom ⚠️ | 🧪 |
 | **WhisperX** (`whisperx`) | ASR + 単語アライメント + 話者分離 | whisper langs | BSD‑2 (+pyannote gated) | 🧪 |
 
-<sub>¹ 同梱のチェックポイントは Korean ですが、MeloTTS/MMS ファミリーは多言語対応です — 追加の言語アダプターは容易にドロップインできます。</sub>
+<sub>¹ 同梱のチェックポイントは Korean ですが、MeloTTS ファミリーは多言語対応です — 追加の言語アダプターは容易にドロップインできます。</sub>
 
 さらに、依存関係不要の **リファレンスエンジン** が 2 つ (`reference_tone`、`reference_asr`) あり、
 クリーンインストール上でパイプライン全体をスモークテストでき、アダプターのテンプレートとしても機能します。
