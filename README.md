@@ -40,7 +40,8 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
   for the supported set. (Conflicting models can opt into isolation — but none of
   the verified models need it.)
 - 🌍 **Multilingual & SOTA.** Wraps leading open models for speech synthesis,
-  zero‑shot voice cloning, and transcription across dozens of languages.
+  zero‑shot voice cloning, and transcription across dozens of languages — plus
+  text‑to‑music and text‑to‑SFX generation.
 - 🔌 **Add a model in one file.** A new engine is a single self‑registering
   adapter — no central dispatch, no UI plumbing to touch.
 - 🧵 **Composable.** Everything speaks ComfyUI’s native `AUDIO` type, so it chains
@@ -78,9 +79,18 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 
 <sub>¹ The shipped checkpoint is Korean; the MeloTTS families are multilingual — additional language adapters are easy drop‑ins.</sub>
 
-Plus two dependency‑free **reference engines** (`reference_tone`, `reference_asr`)
-that let you smoke‑test the whole pipeline on a clean install and serve as the
-adapter template.
+### Generative audio (music · SFX)
+
+| Engine (`id`) | Capability | Languages | License | Status |
+|---|---|---|---|---|
+| **ACE‑Step 1.5** (`ace_step`) | Text‑to‑music (instrumental / song + lyrics) | 50+ incl. ko·zh·ja·en | Apache‑2.0 / MIT | ✅ |
+| **MOSS‑SoundEffect v2.0** (`moss_soundeffect`) | Text‑to‑sound‑effect / Foley | en prompts | Apache‑2.0 | ✅ |
+
+<sub>² Both run on the host torch and output 48 kHz `AUDIO`. ACE‑Step reuses ComfyUI core's native support; MOSS‑SoundEffect's inference code is vendored (no `descript‑audiotools`, no extra torch).</sub>
+
+Plus four dependency‑free **reference engines** (`reference_tone`, `reference_asr`,
+`reference_music`, `reference_sfx`) that let you smoke‑test the whole pipeline on a
+clean install and serve as the adapter template.
 
 ## 🚀 Quick start
 
@@ -112,6 +122,8 @@ engine, its capabilities, and a `pip install …` hint for anything not yet enab
 |---|---|---|
 | **Voice TTS** | `audio/voice/tts` | text (+ optional `VOICE_REF`) → `AUDIO` |
 | **Voice ASR (STT)** | `audio/asr` | `AUDIO` → `VOICE_TRANSCRIPT` + text |
+| **Voice Music Gen** | `audio/generate/music` | text (+ duration/seed) → `AUDIO` |
+| **Voice SFX Gen** | `audio/generate/sfx` | text (+ duration/seed) → `AUDIO` |
 | **Voice Engine Info** | `audio/voice/util` | — → engine/capability report |
 
 Voice cloning is just wiring a reference clip (via core **Load Audio**) into the
@@ -179,8 +191,9 @@ files to edit.
 - [ ] More verified engines (Qwen3‑TTS, Chatterbox, …)
 - [ ] `VOICE_REF` cloning UX + voice library
 - [ ] Voice conversion (RVC / Seed‑VC)
+- [x] Music / SFX generation (ACE‑Step 1.5 · MOSS‑SoundEffect v2.0)
 - [ ] Source separation, denoise/enhance, forced alignment & subtitles
-- [ ] Music / SFX generation, audio editing
+- [ ] Audio editing / inpainting
 
 ## 🤝 Contributing
 
@@ -198,6 +211,6 @@ keeps its **own** license — see the table above and the per‑engine adapter; 
 are non‑commercial or use‑restricted. You are responsible for complying with the
 license of any model you enable.
 
-Built on the shoulders of the open‑source speech community — MeloTTS, CosyVoice,
+Built on the shoulders of the open‑source speech & audio community — MeloTTS, CosyVoice,
 Supertonic, MMS, OpenAI Whisper / faster‑whisper, Kokoro, Chatterbox, Qwen, OuteTTS,
-SenseVoice, WhisperX, and ComfyUI itself. Thank you. 🙏
+SenseVoice, WhisperX, ACE‑Step, MOSS‑SoundEffect (OpenMOSS), and ComfyUI itself. Thank you. 🙏

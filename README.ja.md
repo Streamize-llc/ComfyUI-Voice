@@ -40,7 +40,7 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
   サポート対象のために別の venv を用意する必要もありません。(競合するモデルは分離を選択できますが、
   検証済みモデルでそれを必要とするものはありません。)
 - 🌍 **多言語かつ SOTA。** 数十の言語にわたる音声合成、ゼロショットボイスクローン、
-  文字起こしのための主要なオープンモデルをラップします。
+  文字起こしのための主要なオープンモデルをラップします — さらにテキストから音楽生成、テキストから SFX 生成も。
 - 🔌 **1 ファイルでモデルを追加。** 新しいエンジンは、自己登録するアダプター 1 つで完結します —
   中央ディスパッチも、触るべき UI の配線もありません。
 - 🧵 **組み合わせ可能。** すべてが ComfyUI ネイティブの `AUDIO` 型を話すため、
@@ -78,7 +78,16 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 
 <sub>¹ 同梱のチェックポイントは Korean ですが、MeloTTS ファミリーは多言語対応です — 追加の言語アダプターは容易にドロップインできます。</sub>
 
-さらに、依存関係不要の **リファレンスエンジン** が 2 つ (`reference_tone`、`reference_asr`) あり、
+### 生成オーディオ (音楽 · SFX)
+
+| エンジン (`id`) | 機能 | 言語 | ライセンス | ステータス |
+|---|---|---|---|---|
+| **ACE‑Step 1.5** (`ace_step`) | テキストから音楽生成(インストゥルメンタル / 歌詞付き楽曲) | 50+ incl. ko·zh·ja·en | Apache‑2.0 / MIT | ✅ |
+| **MOSS‑SoundEffect v2.0** (`moss_soundeffect`) | テキストから効果音 / Foley 生成 | en prompts | Apache‑2.0 | ✅ |
+
+<sub>² いずれもホストの torch 上で動作し、48 kHz の `AUDIO` を出力します。ACE‑Step は ComfyUI コアのネイティブサポートを再利用し、MOSS‑SoundEffect の推論コードはベンダリングされています(`descript‑audiotools` 不要、追加の torch も不要)。</sub>
+
+さらに、依存関係不要の **リファレンスエンジン** が 4 つ (`reference_tone`、`reference_asr`、`reference_music`、`reference_sfx`) あり、
 クリーンインストール上でパイプライン全体をスモークテストでき、アダプターのテンプレートとしても機能します。
 
 ## 🚀 クイックスタート
@@ -111,6 +120,8 @@ ComfyUI を再起動し、グラフ内で:
 |---|---|---|
 | **Voice TTS** | `audio/voice/tts` | text (+ optional `VOICE_REF`) → `AUDIO` |
 | **Voice ASR (STT)** | `audio/asr` | `AUDIO` → `VOICE_TRANSCRIPT` + text |
+| **Voice Music Gen** | `audio/generate/music` | text (+ duration/seed) → `AUDIO` |
+| **Voice SFX Gen** | `audio/generate/sfx` | text (+ duration/seed) → `AUDIO` |
 | **Voice Engine Info** | `audio/voice/util` | — → エンジン/機能レポート |
 
 ボイスクローンは、参照クリップを(コアの **Load Audio** 経由で)TTS ノードの `voice_ref` 入力に
@@ -178,7 +189,8 @@ class MyTTS(BaseEngine):
 - [ ] `VOICE_REF` クローンの UX + ボイスライブラリ
 - [ ] ボイス変換 (RVC / Seed‑VC)
 - [ ] 音源分離、ノイズ除去/エンハンス、強制アライメント & 字幕
-- [ ] 音楽 / SFX 生成、オーディオ編集
+- [x] 音楽 / SFX 生成 (ACE‑Step 1.5 · MOSS‑SoundEffect v2.0)
+- [ ] オーディオ編集 / インペインティング
 
 ## 🤝 コントリビュート
 
@@ -195,6 +207,6 @@ ComfyUI-Voice は **Apache‑2.0** ライセンスの下で公開されていま
 **それ自身の** ライセンスを保持します — 上記の表と各エンジンのアダプターを参照してください。
 一部は非商用または利用制限付きです。有効化したモデルのライセンスを順守する責任はあなたにあります。
 
-オープンソース音声コミュニティの肩の上に築かれています — MeloTTS、CosyVoice、
+オープンソースの音声・オーディオコミュニティの肩の上に築かれています — MeloTTS、CosyVoice、
 Supertonic、MMS、OpenAI Whisper / faster‑whisper、Kokoro、Chatterbox、Qwen、OuteTTS、
-SenseVoice、WhisperX、そして ComfyUI 自身。ありがとう。🙏
+SenseVoice、WhisperX、ACE‑Step、MOSS‑SoundEffect (OpenMOSS)、そして ComfyUI 自身。ありがとう。🙏

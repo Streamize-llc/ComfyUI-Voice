@@ -36,7 +36,7 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 - 🛡️ **运行在*你自己的* torch 上。** 引擎原生加载在 ComfyUI 现有的
   PyTorch/Transformers 之上。没有版本锁定与你的安装环境冲突，受支持的模型集也无需单独的虚拟环境。
   （存在冲突的模型可以选择隔离运行 —— 但所有已验证的模型都不需要。）
-- 🌍 **多语言且达到 SOTA 水平。** 封装了领先的开源模型，覆盖数十种语言的语音合成、零样本声音克隆与转录。
+- 🌍 **多语言且达到 SOTA 水平。** 封装了领先的开源模型，覆盖数十种语言的语音合成、零样本声音克隆与转录 —— 此外还支持文本转音乐与文本转音效生成。
 - 🔌 **一个文件即可新增一个模型。** 新增引擎只需一个自注册的适配器 —— 无需中心化调度，无需改动任何 UI 管线。
 - 🧵 **可组合。** 一切都使用 ComfyUI 原生的 `AUDIO` 类型，因此可以与内置的 Load/Save/Preview Audio 节点免费串联。
 - ✅ **状态诚实可信。** 只有在本代码库上完成真实的往返测试后，模型才会被标记为*已验证*。
@@ -71,7 +71,16 @@ ref ──▶ [Voice TTS] ─▶ AUDIO                             # zero‑shot
 
 <sub>¹ 随附的检查点为韩语；MeloTTS 系列本身是多语言的 —— 额外的语言适配器可以轻松即插即用。</sub>
 
-此外还提供两个无依赖的**参考引擎**（`reference_tone`、`reference_asr`），
+### 生成式音频（音乐 · 音效）
+
+| 引擎 (`id`) | 能力 | 语言 | 许可证 | 状态 |
+|---|---|---|---|---|
+| **ACE‑Step 1.5** (`ace_step`) | 文本转音乐（纯器乐 / 歌曲 + 歌词） | 50+ 含 ko·zh·ja·en | Apache‑2.0 / MIT | ✅ |
+| **MOSS‑SoundEffect v2.0** (`moss_soundeffect`) | 文本转音效 / 拟音 | 英文提示词 | Apache‑2.0 | ✅ |
+
+<sub>² 两者均运行在宿主 torch 上并输出 48 kHz 的 `AUDIO`。ACE‑Step 复用 ComfyUI 核心的原生支持；MOSS‑SoundEffect 的推理代码已内置（无需 `descript‑audiotools`，也无需额外的 torch）。</sub>
+
+此外还提供四个无依赖的**参考引擎**（`reference_tone`、`reference_asr`、`reference_music`、`reference_sfx`），
 让你在干净的安装环境中即可冒烟测试整条流水线，同时它们也充当适配器模板。
 
 ## 🚀 快速开始
@@ -104,6 +113,8 @@ pip install librosa g2pkk jamo python-mecab-ko python-mecab-ko-dic num2words any
 |---|---|---|
 | **Voice TTS** | `audio/voice/tts` | text（+ 可选 `VOICE_REF`） → `AUDIO` |
 | **Voice ASR (STT)** | `audio/asr` | `AUDIO` → `VOICE_TRANSCRIPT` + text |
+| **Voice Music Gen** | `audio/generate/music` | text（+ 时长/种子） → `AUDIO` |
+| **Voice SFX Gen** | `audio/generate/sfx` | text（+ 时长/种子） → `AUDIO` |
 | **Voice Engine Info** | `audio/voice/util` | — → 引擎/能力报告 |
 
 声音克隆只需将一段参考片段（通过核心节点 **Load Audio**）接入
@@ -170,7 +181,8 @@ class MyTTS(BaseEngine):
 - [ ] `VOICE_REF` 克隆交互体验 + 声音库
 - [ ] 声音转换（RVC / Seed‑VC）
 - [ ] 声源分离、降噪/增强、强制对齐与字幕
-- [ ] 音乐 / 音效生成、音频编辑
+- [x] 音乐 / 音效生成（ACE‑Step 1.5 · MOSS‑SoundEffect v2.0）
+- [ ] 音频编辑 / 修复（inpainting）
 
 ## 🤝 贡献
 
@@ -187,6 +199,6 @@ ComfyUI-Voice 以 **Apache‑2.0** 许可证发布。每个被封装的模型都
 许可证 —— 详见上方表格及各引擎的适配器；其中部分是非商业用途或有使用限制的。
 你需要自行负责遵守你所启用的任何模型的许可证。
 
-本项目站在开源语音社区的肩膀上构建 —— MeloTTS、CosyVoice、
+本项目站在开源语音与音频社区的肩膀上构建 —— MeloTTS、CosyVoice、
 Supertonic、MMS、OpenAI Whisper / faster‑whisper、Kokoro、Chatterbox、Qwen、OuteTTS、
-SenseVoice、WhisperX，以及 ComfyUI 本身。感谢你们。🙏
+SenseVoice、WhisperX、ACE‑Step、MOSS‑SoundEffect (OpenMOSS)，以及 ComfyUI 本身。感谢你们。🙏

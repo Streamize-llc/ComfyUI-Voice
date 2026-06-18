@@ -13,6 +13,8 @@ runtimes/*/
 
 # Model weights / caches / outputs
 models/
+# ...but the vendored MOSS package ships a diffsynth/models/ *source* dir.
+!comfyui_voice/_vendor/**/models/
 output/
 *.wav
 *.flac
@@ -27,3 +29,4 @@ output/
 Thumbs.db
 .idea/
 .vscode/
+.tmp_moss/
