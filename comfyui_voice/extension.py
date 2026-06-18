@@ -20,10 +20,11 @@ class VoiceExtension(ComfyExtension):
 
     async def get_node_list(self) -> list[type[IO.ComfyNode]]:
         from .nodes.asr import VoiceASR
+        from .nodes.gen import VoiceMusicGen, VoiceSFXGen
         from .nodes.tts import VoiceTTS
         from .nodes.util import VoiceEngineInfo
 
-        return [VoiceTTS, VoiceASR, VoiceEngineInfo]
+        return [VoiceTTS, VoiceASR, VoiceMusicGen, VoiceSFXGen, VoiceEngineInfo]
 
 
 async def comfy_entrypoint() -> VoiceExtension:

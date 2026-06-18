@@ -22,7 +22,7 @@ import torch  # noqa: E402
 
 from comfyui_voice import audio_utils, types  # noqa: E402
 from comfyui_voice.base import BaseEngine, EngineCapabilities  # noqa: E402
-from comfyui_voice.processors import asr_processor, tts_processor  # noqa: E402
+from comfyui_voice.processors import asr_processor, gen_processor, tts_processor  # noqa: E402
 from comfyui_voice.registry import (  # noqa: E402
     ENGINE_REGISTRY,
     all_capabilities,
@@ -176,6 +176,21 @@ def test_subprocess_runtime() -> None:
         SubprocessRuntime.shutdown_all()
 
 
+def test_gen_pipeline() -> None:
+    print("[gen pipeline (music/sfx)]")
+    scan_engines()
+    check("reference_music registered", "reference_music" in engines_for_task("music"))
+    check("reference_sfx registered", "reference_sfx" in engines_for_task("sfx"))
+    music = gen_processor.run_gen("music", "reference_music", text="calm piano", duration=2.0, seed=3)
+    sr = music["sample_rate"]
+    check("music is 3-D audio", music["waveform"].dim() == 3)
+    check("music ~= requested duration", abs(music["waveform"].shape[-1] / sr - 2.0) < 0.1)
+    sfx = gen_processor.run_gen("sfx", "reference_sfx", text="thunder", duration=1.5, seed=5)
+    check("sfx is 3-D audio", sfx["waveform"].dim() == 3)
+    check("sfx ~= requested duration", abs(sfx["waveform"].shape[-1] / sfx["sample_rate"] - 1.5) < 0.1)
+    check("gen audio in range", float(music["waveform"].abs().max()) <= 1.0)
+
+
 def main() -> int:
     for fn in (
         test_type_hygiene,
@@ -188,6 +203,7 @@ def main() -> int:
         test_availability,
         test_asr_pipeline,
         test_subprocess_runtime,
+        test_gen_pipeline,
     ):
         fn()
     print(f"\n{_passed} passed, {_failed} failed")

@@ -7,7 +7,7 @@ from comfy_api.latest import IO
 
 from ..registry import all_capabilities, engine_available, install_hint, scan_engines
 
-_TASKS = ["all", "tts", "voice_conversion", "asr", "separate", "enhance"]
+_TASKS = ["all", "tts", "voice_conversion", "asr", "music", "sfx", "separate", "enhance"]
 
 
 class VoiceEngineInfo(IO.ComfyNode):
